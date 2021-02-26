@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Post
+from .models import Post, Category
 
 # Create your views here.
 #MVC - model view controller
@@ -23,9 +23,21 @@ def home_param(request, post_id):
 def post_list(request):
     #name = 'Luiz Carlos'
     #return render(request, 'post_list.html', {'name': name})
-    posts = Post.objects.all()
-    return render(request, 'post_list.html', {'posts': posts})
+    if 'category_id' in request.GET:
+        category = Category.objects.get(id=request.GET['category_id'])
+        posts = Post.objects.filter(categories=category)
+    else:
+       posts = Post.objects.all()
+    categories = Category.objects.all()
+    return render(request, 'post_list.html', {
+        'posts': posts,
+        'categories': categories
+    })
 
 def post_show(request, post_id):
     posts = Post.objects.get(id=post_id)
-    return render(request, 'post_show.html', {'posts':posts})
+    categories = Category.objects.all()
+    return render(request, 'post_show.html', {
+        'posts':posts,
+        'categories': categories
+    })
