@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog da School of Net</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <h1>Blog da School of Net</h1>
+
+    <nav>
+        <a href="{% url 'post_list' %}">Listar Posts</a>
+    </nav>
+
+    {% block content %}{% endblock %}
+</body>
+</html>
